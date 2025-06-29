@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Create folders and file on Desktop
         run: |
-          $desktopPath = "C:\Users\YourUsername\Desktop"
+          $desktopPath = "C:\Users\Administrator\Desktop"
           $folder1 = "$desktopPath\folder1"
           $folder2 = "$desktopPath\folder2"
 
