@@ -10,9 +10,9 @@ jobs:
     steps:
       - name: Create folders and file on Desktop
         run: |
-          $desktopPath = "C:\Users\Administrator\Desktop"
-          $folder1 = "$desktopPath\folder1"
-          $folder2 = "$desktopPath\folder2"
+          $desktopPath = "C:/Users/Administrator/Desktop"
+          $folder1 = "$desktopPath/folder1"
+          $folder2 = "$desktopPath/folder2"
 
           # Create folder1 if it doesn't exist
           if (!(Test-Path $folder1)) {
