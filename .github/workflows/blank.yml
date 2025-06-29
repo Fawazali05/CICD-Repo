@@ -1,29 +1,31 @@
 name: File Operations on Desktop
 
 on:
-  workflow_dispatch: # Manual trigger from GitHub UI
+  workflow_dispatch: # Trigger manually from GitHub UI
 
 jobs:
   file-work:
-    runs-on: self-hosted  # Your Windows runner
+    runs-on: self-hosted  # Run on your laptop
 
     steps:
-      - name: Create folder1 on Desktop
+      - name: Create folders and file on Desktop
         run: |
-          $desktop = [Environment]::GetFolderPath("Desktop")
-          New-Item -Path "$desktop\folder1" -ItemType Directory
+          $desktopPath = "C:\Users\Administrator\Desktop"
+          $folder1 = "$desktopPath\folder1"
+          $folder2 = "$desktopPath\folder2"
 
-      - name: Create 1.txt inside folder1
-        run: |
-          $desktop = [Environment]::GetFolderPath("Desktop")
-          Set-Content -Path "$desktop\folder1\1.txt" -Value "This is file 1"
+          # Create folder1 if it doesn't exist
+          if (!(Test-Path $folder1)) {
+            New-Item -Path $folder1 -ItemType Directory
+          }
 
-      - name: Create folder2 on Desktop
-        run: |
-          $desktop = [Environment]::GetFolderPath("Desktop")
-          New-Item -Path "$desktop\folder2" -ItemType Directory
+          # Create file 1.txt inside folder1
+          Set-Content -Path "$folder1\1.txt" -Value "This is file 1"
 
-      - name: Copy 1.txt from folder1 to folder2
-        run: |
-          $desktop = [Environment]::GetFolderPath("Desktop")
-          Copy-Item -Path "$desktop\folder1\1.txt" -Destination "$desktop\folder2"
+          # Create folder2 if it doesn't exist
+          if (!(Test-Path $folder2)) {
+            New-Item -Path $folder2 -ItemType Directory
+          }
+
+          # Copy file from folder1 to folder2
+          Copy-Item -Path "$folder1\1.txt" -Destination $folder2
